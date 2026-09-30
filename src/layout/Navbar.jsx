@@ -1,4 +1,4 @@
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -14,6 +14,17 @@ const navLinks = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === "light" ? "light" : "dark");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#f8faf8" : "#0a0d0f";
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      return;
+    }
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 16);
@@ -52,6 +63,16 @@ export const Navbar = () => {
         <a className="nav-resume" href="/Aaliya_Khanam_Resume.pdf" download>
           <Download aria-hidden="true" /> Resume
         </a>
+
+        <button
+          className="theme-button"
+          type="button"
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+        </button>
 
         <button
           className="menu-button"
