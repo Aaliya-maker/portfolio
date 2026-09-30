@@ -1,177 +1,48 @@
-import { Button } from "../components/Button";
-import { ArrowRight,ChevronDown } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
-const socials = [
-  { icon: FaGithub, href: "https://github.com/Aaliya-maker" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/aaliya158/" },
+import { ArrowDown, ArrowRight, Download } from "lucide-react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+const stats = [
+  { value: "3+", label: "Years building products" },
+  { value: "4", label: "Production platforms" },
+  { value: "2x", label: "Career promotions" },
 ];
-const skills = [
-  "Angular",
-  "JavaScript",
-  "HTML5",
-  "CSS3",
-  "Bootstrap",
-  "PrimeNG",
-  "Angular Material",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "Jest",
-  "Git",
-];
-export const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* bg */}
-      <div className="absolute inset-0 ">
-        <img
-          src="/hero-bg.jpg"
-          alt="Hero image"
-          className="w-full h-full object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
+
+export const Hero = () => (
+  <section className="hero" aria-labelledby="hero-title">
+    <div className="hero-grid" aria-hidden="true" />
+    <div className="site-container hero-layout">
+      <div className="hero-copy">
+        <div className="availability"><span aria-hidden="true" /> Open to senior frontend opportunities</div>
+        <p className="hero-kicker">Senior Software Engineer · Gurgaon, India</p>
+        <h1 id="hero-title">Aaliya Khanam builds <em>clear, scalable</em> digital products.</h1>
+        <p className="hero-intro">Frontend engineer specializing in Angular and TypeScript, turning complex enterprise workflows into fast, dependable experiences people can use with confidence.</p>
+
+        <div className="hero-actions">
+          <Link className="button button-primary" to="/projects">Explore my work <ArrowRight aria-hidden="true" /></Link>
+          <a className="button button-secondary" href="/Aaliya_Khanam_Resume.pdf" download><Download aria-hidden="true" /> Resume</a>
+        </div>
+
+        <div className="hero-socials" aria-label="Social profiles">
+          <span>Find me online</span>
+          <a href="https://github.com/Aaliya-maker" target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub aria-hidden="true" /></a>
+          <a href="https://www.linkedin.com/in/aaliya158/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn aria-hidden="true" /></a>
+        </div>
       </div>
-      {/* Green Dots */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, index) => (
-          <div
-            className="w-2 h-2 bg-green-500 rounded-full absolute"
-            style={{
-              backgroundColor: "#20B2A6",
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `slow-drift ${
-                15 + Math.random() * 20
-              }s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
+
+      <div className="hero-portrait-wrap">
+        <div className="portrait-label"><span>Currently</span> Senior Software Engineer</div>
+        <img className="hero-portrait" src="/profile-photo.jpg" alt="Aaliya Khanam" width="720" height="900" fetchPriority="high" />
+        <div className="portrait-accent" aria-hidden="true">AK</div>
+      </div>
+
+      <dl className="hero-stats">
+        {stats.map((stat) => (
+          <div key={stat.label}><dt>{stat.value}</dt><dd>{stat.label}</dd></div>
         ))}
-      </div>
-      {/* Content */}
-      <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column-Text Content */}
-          <div className="space-y-8">
-            <div className="animate-fade-in">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
-                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Senior Software Engineer • Angular Developer
-              </span>
-            </div>
-            {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
-                Code That
-                <br />
-                <span className="text-primary glow-text">Makes Sense.</span>
-              </h1>
+      </dl>
+    </div>
 
-              <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                Hi, I'm{" "}
-                <span className="text-white font-medium">Aaliya Khanam</span>, a
-                Software Engineer with 3+ years of experience building
-                responsive and scalable web applications using Angular, React,
-                JavaScript, and TypeScript. I focus on writing clean,
-                maintainable code and creating practical, user-friendly
-                experiences.
-              </p>
-            </div>
-            {/* CTA BUTTONS */}
-            <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg">
-                Contact Me <ArrowRight className="w-5 h-5" />
-              </Button>
-              <AnimatedBorderButton />
-            </div>
-            {/* Social Links */}
-            <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
-              <span className="text-sm text-muted-foreground">Follow me:</span>
-              {socials.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
-                >
-                  {<social.icon className="w-5 h-5" />}
-                </a>
-              ))}
-            </div>
-          </div>
-          {/* Right Column - Profile Image */}
-          <div className="relative animate-fade-in animation-delay-300">
-            {/* Profile Image */}
-            <div className="relative max-w-md mx-auto">
-              <div
-                
-              >
-                <div className="relative glass rounded-3xl p-2 glow-border">
-                  <img
-                    src="/profile-photo.jpg"
-                    alt="Aaliya Khanam"
-                    className="w-full aspect-[4/5] object-cover rounded-2xl"
-                  />
-                  <div className="absolute -bottom-4 -right-4 glass rounded-xl px-4 py-3 animate-float">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium">
-                      Available for work
-                    </span>
-                  </div>
-                </div>
-                {/* Stats Badge */}
-                <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-2xl font-bold text-primary">3+</div>
-                  <div className="text-xs text-muted-foreground">
-                    Years Exp.
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Skills */}
- <div className="mt-20 animate-fade-in animation-delay-600">
-          <p className="text-sm text-muted-foreground mb-6 text-center">
-            Technologies I work with
-          </p>
-          <div className="relative overflow-hidden">
-            <div
-              className="absolute left-0 top-0 bottom-0 w-32
-             bg-gradient-to-r from-background to-transparent z-10"
-            />
-            <div
-              className="absolute right-0 top-0 bottom-0 w-32
-             bg-gradient-to-l from-background to-transparent z-10"
-            />
-            <div className="flex animate-marquee">
-              {[...skills, ...skills].map((skill, idx) => (
-                <div key={idx} className="flex-shrink-0 px-8 py-4">
-                  <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">
-                    {skill}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-        <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 
-      animate-fade-in animation-delay-800"
-      >
-        <a
-          href="#about"
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
-        >
-          <span className="text-xs uppercase tracking-wider">Scroll</span>
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-        </a>
-      </div>
-
-  
-    </section>
-  );
-};
+    <Link className="scroll-cue" to="/about"><ArrowDown aria-hidden="true" /><span>Profile</span></Link>
+  </section>
+);
